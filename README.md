@@ -1,6 +1,6 @@
-@[TOC](Spring Boot+MyBatis+Mysql)
+# Spring Boot+MyBatis+Mysql
 
-# 添加依赖
+## 添加依赖
 引入  <kbd>lombok</kbd>、<kbd>mysql-connector-java</kbd> 、<kbd>mybatis-plus-boot-starter</kbd>  依赖：
 
 ```java
@@ -33,7 +33,7 @@ spring.datasource.password=root
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 ```
 
-在 Spring Boot 启动类中添加 @MapperScan 注解，扫描 Mapper 文件夹：
+在 Spring Boot 启动类中添加 @MapperScan 注解，扫描 Mapper 目录：
 
 ```java
 @SpringBootApplication
@@ -179,8 +179,43 @@ User(id=5, name=Billie, age=24, email=test5@baomidou.com)
     "errMsg": "获取成功"
 }
 ```
-
 > 完整的代码示例请移步：[Spring Boot+MyBatis+Mysql示例](https://github.com/TianSiQiang/Spring-Boot-MyBatis-Mysql)
+
+## 数据库
+1、<kbd>User</kbd> 表，其结构如下：
+|1	|Jone|18|test1@baomidou.com|
+|--|--|--|--|
+|2|Jack|20|test2@baomidou.com|
+|3|Tom	|28|	test3@baomidou.com|
+|4	|Sandy|21|	test4@baomidou.com|
+|5	|Billie	|24|	test5@baomidou.com|
+2、其对应的数据库脚本如下：
+
+```sql
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user
+(
+	id BIGINT(20) NOT NULL COMMENT '主键ID',
+	name VARCHAR(30) NULL DEFAULT NULL COMMENT '姓名',
+	age INT(11) NULL DEFAULT NULL COMMENT '年龄',
+	email VARCHAR(50) NULL DEFAULT NULL COMMENT '邮箱',
+	PRIMARY KEY (id)
+);
+```
+3、其对应的数据库 Data 脚本如下：
+
+```sql
+DELETE FROM user;
+
+INSERT INTO user (id, name, age, email) VALUES
+(1, 'Jone', 18, 'test1@baomidou.com'),
+(2, 'Jack', 20, 'test2@baomidou.com'),
+(3, 'Tom', 28, 'test3@baomidou.com'),
+(4, 'Sandy', 21, 'test4@baomidou.com'),
+(5, 'Billie', 24, 'test5@baomidou.com');
+```
+
 
 ## 小结
 通过以上几个简单的步骤，我们就实现了 User 表的 CRUD 功能，甚至连 XML 文件都不用编写！
